@@ -13,8 +13,14 @@ if __name__ == "__main__":
     #
     # 1. Retrieve a list of "events" associated with the given user name
     # 2. Print out the time stamp associated with the first event in that list.
+    response = requests.get("https://api.github.com/users/{}/events".format(username))
+    events = json.loads(response.content)
 
-    print("COMPLETE THE TODOs")
-    
+    latest_event = events[0]['type']
+    creation_date = events[0]['created_at']
+    print("The username, {}, lastest event was a(n) {} on {}".format(username,
+                                                            latest_event,
+                                                            creation_date))
 
-
+# tested at the command line:
+# python3 main.py danielgrubbs
